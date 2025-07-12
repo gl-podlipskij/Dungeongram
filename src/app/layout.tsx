@@ -2,13 +2,14 @@ import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import {ReactNode} from "react";
 import {AppRouterCacheProvider} from "@mui/material-nextjs/v13-appRouter";
+import {ThemeProvider} from "@mui/material";
+import theme from "@/theme/theme";
 
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
-
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -26,7 +27,9 @@ export default function RootLayout({
         className={`${geistSans.variable} antialiased`}
       >
         <AppRouterCacheProvider>
-          {children}
+            <ThemeProvider theme={theme}>
+                {children}
+            </ThemeProvider>
         </AppRouterCacheProvider>
       </body>
     </html>
