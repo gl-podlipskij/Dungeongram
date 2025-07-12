@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
 import {ReactNode} from "react";
 import {AppRouterCacheProvider} from "@mui/material-nextjs/v15-appRouter";
 import {GlobalStyles, ThemeProvider} from "@mui/material";
