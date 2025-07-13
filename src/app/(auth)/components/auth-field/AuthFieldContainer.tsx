@@ -1,17 +1,19 @@
 "use client"
-import {createRef, FC, ReactNode, useEffect} from "react";
-import {Fade, Typography} from "@mui/material";
+import {createRef, FC, memo, ReactNode, useEffect} from "react";
+import {Grow, Typography} from "@mui/material";
 import {Stack} from "@mui/system";
-import useBoolean from "@/hooks/useBoolean";
+import useBoolean from "@/lib/hooks/useBoolean";
 
 export interface AuthInputProps {
     title : string;
     description ?: string;
-    errorText : string | null;
+    errors : string[];
     children ?: ReactNode;
 }
+
 const AuthFieldContainer:FC<AuthInputProps> = ({
-    title, description, children
+    title, description, children,
+    errors,
 })=>{
     const [isFocused, focus, blur] = useBoolean();
     const containerRef = createRef<HTMLDivElement>();
@@ -35,17 +37,22 @@ const AuthFieldContainer:FC<AuthInputProps> = ({
     });
 
     return (
-        <Stack onClick={focus} ref={containerRef} display="flex" flexDirection="column" gap={1.5}>
+        <Stack onClick={focus} ref={containerRef} display="flex" flexDirection="column" gap={1}>
             <Typography textTransform="uppercase" variant="h6">{title}</Typography>
             {children}
             {
                 description !== undefined &&
-                <Fade in={isFocused} hidden={!isFocused}>
+                <Grow in={isFocused} hidden={!isFocused}>
                     <Typography>{description}</Typography>
-                </Fade>
+                </Grow>
             }
+            <Grow in={errors.length !== 0}>
+                <Typography color="error">
+                    {errors.join("\n")}
+                </Typography>
+            </Grow>
         </Stack>
     )
 }
 
-export default AuthFieldContainer;
+export default memo(AuthFieldContainer);

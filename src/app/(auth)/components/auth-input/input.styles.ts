@@ -5,7 +5,7 @@ export const input:SxProps<Theme> = {
     "::before, ::after" : {
         content : "none",
     },
-    padding : 2,
+    padding : 1.5,
     borderRadius : 1.5,
     borderStyle : "solid",
     borderWidth : 1,

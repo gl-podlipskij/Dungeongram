@@ -3,14 +3,14 @@ import {ChangeEvent, FC, useState} from "react";
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import * as styles from "./input.styles";
-import useBoolean from "@/hooks/useBoolean";
+import useBoolean from "@/lib/hooks/useBoolean";
 import {SxProps} from "@mui/system";
 
 export interface AuthInputProps {
     value : string;
     onChange : (value : string) => void;
 }
-export const AuthTextInput:FC<AuthInputProps> = ({
+const TextInput:FC<AuthInputProps> = ({
     value, onChange
 })=>{
     const [isFocusing, focus, blur] = useBoolean();
@@ -18,6 +18,7 @@ export const AuthTextInput:FC<AuthInputProps> = ({
     const handleChange = (ev:ChangeEvent<HTMLInputElement>)=>{
         onChange(ev.target.value);
     }
+
 
     return (
         <Input
@@ -33,7 +34,7 @@ export const AuthTextInput:FC<AuthInputProps> = ({
     )
 }
 
-export const AuthPasswordInput:FC<AuthInputProps> = ({
+const PasswordInput:FC<AuthInputProps> = ({
     value, onChange
 })=>{
     const [isFocusing, focus, blur] = useBoolean();
@@ -55,6 +56,7 @@ export const AuthPasswordInput:FC<AuthInputProps> = ({
             type={hide ? "password" : "text"}
             value={value}
             onChange={handleChange}
+
             sx={{
                 ...styles.input,
                 ...(isFocusing ? styles.focusedInput : {}),
@@ -65,3 +67,6 @@ export const AuthPasswordInput:FC<AuthInputProps> = ({
         />
     )
 }
+
+export const AuthTextInput = (TextInput);
+export const AuthPasswordInput = (PasswordInput);
